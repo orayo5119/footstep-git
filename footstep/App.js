@@ -1,12 +1,28 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { MapView } from 'expo';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <MapView
+            style={{ flex: 1 }}
+            initialRegion={{
+              latitude: 25.044911,
+              longitude: 121.567461,
+              latitudeDelta: 0.05,
+              longitudeDelta: 0.05,
+            }}
+      >      
+            <MapView.Marker
+              coordinate={{
+                latitude: 25.044911,
+                longitude: 121.567461,
+              }}
+                title={"Current location"}
+                description={'2018/01/11'}
+            />
+      </MapView>
     );
   }
 }
