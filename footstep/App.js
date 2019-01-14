@@ -2,36 +2,65 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MapView } from 'expo';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <MapView
-            style={{ flex: 1 }}
-            initialRegion={{
-              latitude: 25.044911,
-              longitude: 121.567461,
-              latitudeDelta: 0.05,
-              longitudeDelta: 0.05,
-            }}
-      >      
-            <MapView.Marker
-              coordinate={{
-                latitude: 25.044911,
-                longitude: 121.567461,
-              }}
-                title={"Current location"}
-                description={'2018/01/11'}
-            />
-      </MapView>
-    );
-  }
-}
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import Icon from 'react-native-vector-icons/Feather';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import Googlemaps from './screens/Googlemaps';
+import Home from './screens/Home';
+
+// export default class App extends React.Component {
+//   render() {
+//     return (
+
+//       <Googlemaps style={styles.googlemaps}/>
+//       <View>
+//         Hello!
+//       </View>
+      
+//     );
+//   }
+// }
+
+const TabNavigator = createBottomTabNavigator(
+	{
+		Home: {
+			screen: Home,
+			navigationOptions: {
+				tabBarLabel: 'Home',
+				tabBarIcon: ({ tintColor }) => <Icon name="home" color={tintColor} size={24} />
+			}
+		},
+		Googlemaps: {
+			screen: Googlemaps,
+			navigationOptions: {
+				tabBarLabel: 'Maps',
+				tabBarIcon: ({ tintColor }) => <Icon name="map" color={tintColor} size={24} />
+			}
+		},
+
+	},
+	{
+		tabBarOptions: {
+			activeTintColor: 'tomato',
+			inactiveTintColor: 'gray',
+			style: {
+				backgroundColor: 'white',
+				borderTopWidth: 0,
+				shadowOffset: { width: 3, height: 3 },
+				shadowColor: 'black',
+				shadowOpacity: 0.4,
+				elevation: 5
+			}
+		}
+	}
+	);
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });
+
+export default createAppContainer(TabNavigator);
