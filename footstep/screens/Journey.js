@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MapView } from 'expo';
 
 
-class Googlemaps extends React.Component {
+class Journey extends React.Component {
   render() {
     return (
       <MapView
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Googlemaps;
+export default Journey;

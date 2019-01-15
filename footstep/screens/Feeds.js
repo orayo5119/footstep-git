@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Button, Image, Alert, StatusBar} from 'react-native';
+import { ImagePicker } from 'expo';
+import * as firebase from 'firebase';
 
+class Feeds extends Component {
 
-class Home extends Component {
     render (){
       return (
         <View style={styles.container}>
-          <Text> This is the Home screen</Text>
+            <Text>This is others' journey</Text>
         </View>
-      )
+      );
     }
 }
 const styles = StyleSheet.create({
@@ -19,4 +21,5 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
   });
-export default Home;
+
+export default Feeds;
