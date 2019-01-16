@@ -30,7 +30,7 @@ class Journey extends React.Component {
 
 const styles = StyleSheet.create({
   maps: {
-    marginTop:400,
+    //marginTop:400,
     height:200,
   }
 });

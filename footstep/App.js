@@ -23,6 +23,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+// header code:
 // Adjustment based on mobile screen size
 const { height, width } = Dimensions.get('window');
 
@@ -32,8 +33,8 @@ export default class App extends React.Component {
   
             this.scrollY = new Animated.Value(0)
     
-            this.startHeaderHeight = 103;
-            this.endHeaderHeight = 80;
+            this.startHeaderHeight = 60;
+            this.endHeaderHeight = 60;
     
             if (Platform.OS == 'android') {
                 this.startHeaderHeight = 70 + StatusBar.currentHeight;
@@ -78,9 +79,15 @@ export default class App extends React.Component {
                                 height: this.animatedHeaderHeight,
                                 backgroundColor: 'white',
                                 borderBottomWidth: 1,
-                                borderBottomColor: '#B7B7B7'
+                                borderBottomColor: '#B7B7B7',
+                                justifyContent: 'center',
                             }}
-                        ></Animated.View>
+                        >
+                        <View style={styles.applogo}>
+                            <Image  source={require('./assets/Journey-logo.png')} />
+                        </View>
+                        
+                        </Animated.View>
                     </View>
                     <BottomNavigation/>
                 </SafeAreaView>
@@ -91,9 +98,14 @@ export default class App extends React.Component {
 
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 1, 
       justifyContent: 'center',
       backgroundColor: '#fff',
       alignItems: 'center',
+    },
+
+    applogo:{
+        justifyContent: 'center',
+        alignItems: 'center',
     },
   });
