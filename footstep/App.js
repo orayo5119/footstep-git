@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Animated, SafeAreaView, Platform} from 'react-native';
-import { MapView, ImagePicker } from 'expo';
+import { StyleSheet, Text, View, Button, Image, Dimensions, Animated, SafeAreaView, Platform, StatusBar} from 'react-native';
+import { MapView, ImagePicker, Permissions } from 'expo';
 import * as firebase from 'firebase';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Feather';
@@ -37,7 +37,7 @@ export default class App extends React.Component {
             this.endHeaderHeight = 60;
     
             if (Platform.OS == 'android') {
-                this.startHeaderHeight = 70 + StatusBar.currentHeight;
+                this.startHeaderHeight = 50 + StatusBar.currentHeight;
                 this.endHeaderHeight = 40 + StatusBar.currentHeight;
             }
     
@@ -92,10 +92,12 @@ export default class App extends React.Component {
                     <BottomNavigation/>
                 </SafeAreaView>
                 
+                
             );
         }
   }
 
+  
   const styles = StyleSheet.create({
     container: {
       flex: 1, 
