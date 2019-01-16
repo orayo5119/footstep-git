@@ -1,4 +1,4 @@
-import React, {Component}from 'react';
+import React,{Component}from 'react';
 import { StyleSheet, Text, View, Button, Image, Alert, StatusBar } from 'react-native';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Feather';

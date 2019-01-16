@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import { Text, View, StyleSheet, Button, Image, Alert, StatusBar} from 'react-native';
+import { Text, View, StyleSheet, Button, Image} from 'react-native';
 import { ImagePicker } from 'expo';
 import * as firebase from 'firebase';
+import HeaderBar from './HeaderBar'
+
+
 
 class Feeds extends Component {
-
     render (){
-      return (
+      return ( 
         <View style={styles.container}>
             <Text>This is others' journey</Text>
         </View>
