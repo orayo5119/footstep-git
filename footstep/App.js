@@ -133,8 +133,6 @@ export default class App extends React.Component {
       alignItems: 'center',
     },
     button: {
-
         marginBottom: 5,
-   
     },
   });
