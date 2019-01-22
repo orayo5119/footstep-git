@@ -12,6 +12,7 @@ import BottomNavigation from './screens/BottomNavigation'
 import AddPic from './screens/AddPic';
 
 
+
 //initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCMM5uK9qKbvplF-6JMWqOzi866YalrmYY",
@@ -30,26 +31,9 @@ firebase.initializeApp(firebaseConfig);
 // Adjustment based on mobile screen size
 const { height, width } = Dimensions.get('window');
 
-const myButton = (
-    <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook}>
-      Login with Facebook
-      </Icon.Button>
-  );
-
 export default class App extends React.Component {
 
-    async loginWithFacebook(){
-        const {type,token} = await Expo.Facebook.logInWithReadPermissionsAsync
-        ('379839499457170', { permissions: ['public_profile']})
-      
-        if(type == 'success') {
-          const credential = firebase.auth.FacebookAuthProvider.credential(token)
-      
-          firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) =>{
-            console.log(error)
-          })
-        }
-      }
+    
 
 	    // For android Top navigation 上方位置的修正
         componentWillMount() {
@@ -89,6 +73,10 @@ export default class App extends React.Component {
             })
     
         }
+
+
+
+
     
         render() {
             return (
