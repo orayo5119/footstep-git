@@ -1,63 +1,57 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import React, {Component} from 'react';
+import { Text, View, StyleSheet, Button, TouchableOpacity, Image, TouchableHighlight} from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
+import * as firebase from 'firebase';
+import Icon from 'react-native-vector-icons/Feather';
 
-export default class App extends React.Component {
+
+
+
+class AddPic extends Component {
   state = {
     image: null,
   };
 
-  selectPicture = async () => {
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
-      aspect: 1,
-      allowsEditing: true,
-    });
-    if (!cancelled) this.setState({ image: uri });
-  };
+    render (){
 
-  takePicture = async () => {
-    await Permissions.askAsync(Permissions.CAMERA);
-    const { cancelled, uri } = await ImagePicker.launchCameraAsync({
-      allowsEditing: false,
-    });
-    this.setState({ image: uri });
-  };
+      let { image } = this.state;
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Image style={styles.image} source={{ uri: this.state.image }} />
-        <View style={styles.row}>
-          <Button onPress={this.selectPicture}>Gallery</Button>
-          <Button onPress={this.takePicture}>Camera</Button>
+      return ( 
+        <View >
+                  <View>
+
+                    <TouchableOpacity onPress={this._pickImage}>
+                        <View>
+                            <Icon name="camera" size={30} color='gray'/>
+                        </View>
+                    </TouchableOpacity>
+                    <View>
+                      {image && <Image source={{ uri: image }} style={{ width: 300, height: 300 }} />}
+                    </View>
+                  </View>
         </View>
-      </View>
-    );
-  }
+      );
+    }
+
+    _pickImage = async () => {
+      await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      let result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [4, 3],
+      });
+  
+      console.log(result);
+  
+      if (!result.cancelled) {
+        this.setState({ image: result.uri });
+      }
+    };
 }
 
-const Button = ({ onPress, children }) => (
-  <TouchableOpacity style={styles.button} onPress={onPress}>
-    <Text style={styles.text}>{children}</Text>
-  </TouchableOpacity>
-);
+
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 21,
-  },
-  row: { flexDirection: 'row' },
-  image: { width: 300, height: 300, backgroundColor: 'gray' },
-  button: {
-    padding: 13,
-    margin: 15,
-    backgroundColor: '#dddddd',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    
+  });
+
+export default AddPic;

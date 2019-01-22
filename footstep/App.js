@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Animated, SafeAreaView, Platform, StatusBar} from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Dimensions, Animated, SafeAreaView, Platform, StatusBar, TouchableHighlight, TouchableOpacity} from 'react-native';
 import { MapView, ImagePicker, Permissions } from 'expo';
 import * as firebase from 'firebase';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
@@ -9,6 +9,7 @@ import Journey from './screens/Journey';
 import Feeds from './screens/Feeds';
 import Profile from './screens/Profile';
 import BottomNavigation from './screens/BottomNavigation'
+import AddPic from './screens/AddPic';
 
 
 //initialize Firebase
@@ -23,11 +24,33 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+
+
 // header code:
 // Adjustment based on mobile screen size
 const { height, width } = Dimensions.get('window');
 
+const myButton = (
+    <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook}>
+      Login with Facebook
+      </Icon.Button>
+  );
+
 export default class App extends React.Component {
+
+    async loginWithFacebook(){
+        const {type,token} = await Expo.Facebook.logInWithReadPermissionsAsync
+        ('379839499457170', { permissions: ['public_profile']})
+      
+        if(type == 'success') {
+          const credential = firebase.auth.FacebookAuthProvider.credential(token)
+      
+          firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) =>{
+            console.log(error)
+          })
+        }
+      }
+
 	    // For android Top navigation 上方位置的修正
         componentWillMount() {
   
@@ -69,29 +92,45 @@ export default class App extends React.Component {
     
         render() {
             return (
-              
+                
                 // SafeAreaView 避掉 iphone x 的瀏海
                 // 上方Top navigation coding demo
-                <SafeAreaView style={{ flex: 1 }}>
-                    <View style={{ flex: 1 }}>
-                        <Animated.View
-                            style={{
-                                height: this.animatedHeaderHeight,
-                                backgroundColor: 'white',
-                                borderBottomWidth: 1,
-                                borderBottomColor: '#B7B7B7',
-                                justifyContent: 'center',
-                            }}
-                        >
-                        <View style={styles.applogo}>
-                            <Image  source={require('./assets/Journey-logo.png')} />
+                <React.Fragment>
+
+                    {/* <Button onPress={() => this.loginWithFacebook()}>Login with Facebook</Button> */}
+                    <SafeAreaView style={{ flex: 1 }}>
+                        <View style={{ flex: 1 }}>
+                            <Animated.View
+                                style={{
+                                    flexDirection: "row",
+                                    height: this.animatedHeaderHeight,
+                                    backgroundColor: 'white',
+                                    borderBottomWidth: 1,
+                                    borderBottomColor: '#B7B7B7',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    paddingHorizontal: 20,
+
+                                }}
+                            >
+                            <AddPic />
+                            
+                            <Image source={require('./assets/Journey-logo.png')} />
+                            
+                            <TouchableOpacity style={styles.button} onPress={()=>{}}>
+                                <View>
+                                    <Icon name="menu" size={30} color='gray'/>
+                                </View>
+                            </TouchableOpacity>
+                            
+                            </Animated.View>
                         </View>
-                        
-                        </Animated.View>
-                    </View>
+
+                    </SafeAreaView>
+                    
                     <BottomNavigation/>
-                </SafeAreaView>
-                
+
+                </React.Fragment>
                 
             );
         }
@@ -105,9 +144,9 @@ export default class App extends React.Component {
       backgroundColor: '#fff',
       alignItems: 'center',
     },
+    button: {
 
-    applogo:{
-        justifyContent: 'center',
-        alignItems: 'center',
+        marginBottom: 5,
+   
     },
   });
