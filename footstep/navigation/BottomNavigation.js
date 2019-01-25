@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, Button, Image, Alert, StatusBar } from 'react-n
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Feather';
 
-import Journey from './Journey';
-import Feeds from './Feeds';
-import Profile from './Profile';
+import Journey from '../screens/Journey';
+import Feeds from '../screens/Feeds';
+import Profile from '../screens/Profile';
 
 //Bottom navigation code
 const TabNavigator = createBottomTabNavigator(
