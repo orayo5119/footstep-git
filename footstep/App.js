@@ -122,7 +122,7 @@ export default class App extends React.Component {
 
                 // </React.Fragment>
 
-                <View style={styles.container}>
+                <View style={styles.container }>
                     <LoginScreen/>
                 </View>
                 

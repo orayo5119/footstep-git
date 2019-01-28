@@ -3,6 +3,7 @@ import { View, Button, Text, StyleSheet, Image, Alert} from 'react-native'
 import * as firebase from 'firebase';
 import BottomNavigation from '../navigation/BottomNavigation';
 import { createStackNavigator } from 'react-navigation';
+import Feeds from './Feeds';
 
 
 
@@ -36,17 +37,17 @@ class LoginScreen extends React.Component {
         })
       };
 
-    renderImage(){
+  //   renderImage(){
 
-        console.log(this.state.userInfo);
-        this.render(
-          // <View>
-          //   <Image source={{url: this.state.userInfo.photoURL}} />
+  //       console.log(this.state.userInfo);
+  //       this.render(
+  //         <View>
+  //           <Image source={{url: this.state.userInfo.photoURL}} />
             
-          // </View>
+  //         </View>
           
-        )
-  }
+  //       )
+  // }
 
 
 
@@ -77,6 +78,7 @@ class LoginScreen extends React.Component {
             
 
             Alert.alert('Logged in!', `Hi ${this.state.userInfo.name}!`);
+            
           } else {
             // type === 'cancel'
           }
@@ -92,8 +94,8 @@ class LoginScreen extends React.Component {
                     source={{ url: this.state.userInfo.picture.data.url}}
                     style={{ width: 80, height: 80, borderRadius: 30}}
                 />
-                <Text></Text>
-                <Text> ID: {this.state.userInfo.id}</Text>
+                <Text>{this.state.userInfo.name}</Text>
+                {/* <Text> ID: {this.state.userInfo.id}</Text> */}
             </View>
             
           );
@@ -107,7 +109,7 @@ class LoginScreen extends React.Component {
             </View>
 
             {!this.state.userInfo ? (<Button title="login with fb" onPress={this.FBlogIn.bind(this)} />):(this._renderUserInfo())}
-
+            
         </View>
             
             
@@ -115,7 +117,9 @@ class LoginScreen extends React.Component {
 
     }
 
-
+    // _jumpMain = () => {
+    //   this.props.navigation.navigate('Main');
+    // };
 }
 
 const styles = StyleSheet.create({
